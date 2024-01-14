@@ -10,6 +10,24 @@ const resolver = require('./graphql/resolver');
 const isAuth = require('./middleware/auth');
 const fs = require('fs');
 
+
+const allowedOrigins = ['http://localhost:1234', 'https://feed-chat-460de.web.app', 'https://feed-chat-460de.firebaseapp.com'];
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  console.log(origin, allowedOrigins.includes(origin));
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method == 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
+
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, './images'));
@@ -37,22 +55,12 @@ app.use(
 app.use(bodyParser.json());
 app.use('/images', express.static(path.join(__dirname, './images')));
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:1234');
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-  );
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
-  if (req.method == 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-  next();
-});
+
 
 app.use(isAuth);
 
 app.put('/photo-url', (req, res, next) => {
+  console.log(req.isAuth)
   if (!req.isAuth) {
     return res.status(401).json({
       message: 'Sorry no authenticated user!',
@@ -102,6 +110,7 @@ app.use(
 
 app.use((error, req, res, next) => {
   const status = error.code || 500;
+  console.log(error);
   return res.status(status).json({
     message: error.message,
     error: error.toString(),
