@@ -85,7 +85,6 @@ const CreateFeedPost = (prop) => {
                 }
 
                 const savePostResult = await useSavePostHook.savePost(formData, prop.feedPostData);
-                console.log(savePostResult)
                 if (savePostResult instanceof Error) {
                     setErrorState({ error: savePostResult })
                 } else {

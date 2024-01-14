@@ -3,9 +3,6 @@ import { Backdrop, Modal, Box, Typography, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 
 const ErrorHandler = (props) => {
-    React.useEffect(() => {
-        console.log(props)
-    }, [props.error])
 
     return (<>
         {props.error && (

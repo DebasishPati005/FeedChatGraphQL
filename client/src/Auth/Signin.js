@@ -88,7 +88,6 @@ const Signin = () => {
 
   const token = localStorage.getItem("accessToken");
   React.useEffect(() => {
-    console.log(typeof token);
     if (token) { return navigate("/all-posts"); }
   }, [])
 
@@ -102,13 +101,11 @@ const Signin = () => {
     }
     const validatedError = validateInput(userInput)
     setErrors(validatedError);
-    console.log(validatedError)
     if (validatedError.length === 0) {
       try {
         await authenticateUser(userInput);
         navigate('/all-posts')
       } catch (err) {
-        console.log(err);
         setErrorState({ error: err })
       }
     }

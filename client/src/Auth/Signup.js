@@ -110,7 +110,6 @@ const Signup = () => {
                 await createUser(userInput);
                 navigate('/signin')
             } catch (err) {
-                console.log(err);
                 setErrorState({ error: err })
             }
         }

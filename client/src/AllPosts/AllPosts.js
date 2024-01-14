@@ -147,15 +147,6 @@ const AllPosts = () => {
                                         }
                                     }
                                     deleFn()
-                                    // useDeletePost.deletePost(post._id).then((deletePoseResult) => {
-                                    //     console.log(deletePoseResult instanceof Error)
-                                    //     if (deletePoseResult instanceof Error) {
-                                    //         setErrorState(error)
-                                    //     }
-                                    // }).catch((error) => {
-                                    //     setErrorState(error)
-                                    // });
-
                                 }} >
                                     Delete
                                 </Button>
