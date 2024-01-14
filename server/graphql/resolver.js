@@ -224,7 +224,6 @@ module.exports = {
     }
     await Post.findByIdAndDelete(postId);
     user.post.pull(postId);
-    console.log(user.post);
     removeFile(postItem.imageUrl);
     await user.save();
     return {
