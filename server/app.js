@@ -122,7 +122,7 @@ mongoose
   .connect(process.env.DB_URL)
   .then(() => {
     console.log('Connected to DB');
-    app.listen(8080);
+    app.listen(process.env.PORT);
   })
   .catch((error) => {
     console.log(error);

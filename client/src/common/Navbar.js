@@ -17,7 +17,7 @@ const Navbar = () => {
                 margin: { sm: "0px 30px" },
                 justifyContent: "space-between"
             }}>
-                <Link style={{ textDecoration: "none" }} to="/">
+                <Link style={{ textDecoration: "none", color: "white" }} to="/">
                     <Typography variant="h6">
                         Feed Chat
                     </Typography>
@@ -37,7 +37,7 @@ const Navbar = () => {
 
                     }
                 }}>
-                    {token ? "Logout" : location.pathname.includes("signin") ? "Sigb up" : "Sign in"}
+                    {token ? "Logout" : location.pathname.includes("signin") ? "Sign up" : "Sign in"}
                 </Button>
                 {/* </Box> */}
 
